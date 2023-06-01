@@ -1,0 +1,180 @@
+<section class="mb-12">
+  <h2 class="font-bold text-[18px] text-black mb-4">
+    Individual Creator Performance
+  </h2>
+  <div>
+    <div class="w-full flex flex-row border-b-[3px] mt-4 mb-8 gap-4">
+      <div
+        (click)="changeTab('instagram')"
+        class="{{
+          tab == 'instagram' ? 'text-[#434ddb] border-b-4 border-[#434ddb]' : ''
+        }} pb-2 cursor-pointer"
+      >
+        Instagram
+      </div>
+
+      <div
+        (click)="changeTab('youtube')"
+        class="{{
+          tab == 'youtube' ? 'text-[#434ddb] border-b-4 border-[#434ddb]' : ''
+        }} pb-2 cursor-pointer"
+      >
+        YouTube
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="tab == 'instagram'">
+    <div class="flex flex-col md:flex-row gap-4 md:gap-8 md:items-center">
+      <form class="relative">
+        <input
+          class="border-2 border-gray-400/60 py-1 pl-12 pr-3 rounded-lg focus:ring-0 focus:outline-none focus:border-blue-400"
+          type="text"
+          placeholder="Full Name"
+        />
+
+        <span class="absolute left-3 top-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6 text-gray-400"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+            />
+          </svg>
+        </span>
+      </form>
+
+      <div
+        (click)="setDrop()"
+        class="relative w-[220px] flex cursor-pointer flex-row justify-between items-center py-1 px-4 border-2 border-gray-400/60 rounded-lg"
+      >
+        <div>
+          {{ postType }}
+        </div>
+
+        <span class="{{ drop ? 'rotate-180' : '' }}">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </span>
+
+        <div
+          *ngIf="drop"
+          class="absolute top-[110%] left-0 bg-white p-1 border rounded-lg shadow-lg w-full space-y-2"
+        >
+          <div
+            (click)="changeType('Post')"
+            class="{{
+              postType == 'Post' ? 'bg-blue-600 text-white' : ''
+            }} hover:bg-blue-300 hover:text-blue-700 rounded-lg cursor-pointer p-2 flex flex-row gap-3"
+          >
+            <p>Post</p>
+          </div>
+
+          <div
+            (click)="changeType('Reels')"
+            class="{{
+              postType == 'Reels' ? 'bg-blue-600 text-white' : ''
+            }} hover:bg-blue-300 hover:text-blue-700 rounded-lg cursor-pointer p-2 flex flex-row gap-3"
+          >
+            <p>Reels</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 mb-6">
+      <table class="border rounded-xl w-full">
+        <thead class="bg-gray-500/30 text-[12px] font-bold text-black">
+          <tr>
+            <th class="px-6 py-3 tracking-wider text-left">Creator</th>
+            <th class="px-6 py-3 tracking-wider text-left">Post Type</th>
+            <th class="px-6 py-3 tracking-wider text-left">Reach</th>
+            <th class="px-6 py-3 tracking-wider text-left">Impressions</th>
+            <th class="px-6 py-3 tracking-wider text-left">Views</th>
+            <th class="px-6 py-3 tracking-wider text-left">Clicks</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t" *ngIf="data?.length === 0">
+            <td class="p-6" colspan="100%">
+              <div class="flex flex-col items-center justify-center h-8">
+                <div class="py-2 text-center text-neutral-500">
+                  No records found
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <ng-container *ngIf="data?.length !== 0">
+            <tr
+              *ngFor="let item of data"
+              class="border-b cursor-pointer text-[1rem]"
+            >
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.creatorName }}</div>
+                </div>
+              </td>
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.postType }}</div>
+                </div>
+              </td>
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.reach }}</div>
+                </div>
+              </td>
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.impressions }}</div>
+                </div>
+              </td>
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.views }}</div>
+                </div>
+              </td>
+              <td class="px-4 py-2 h-8">
+                <div>
+                  <div class="font-medium">{{ item.clicks }}</div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [size]="pagination.size"
+      [totalItems]="pagination.totalElements"
+      [number]="pagination.number + 1"
+      [numberElements]="pagination.numberOfElements"
+      [onPageChanged]="''"
+    ></app-pagination>
+  </ng-container>
+
+  <ng-container *ngIf="tab == 'youtube'">
+    <app-not-found></app-not-found>
+  </ng-container>
+</section>

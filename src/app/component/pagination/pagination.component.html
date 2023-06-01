@@ -1,0 +1,151 @@
+<div
+  class="text-[14px] gap-4 text-gray-700 flex flex-col md:flex-row items-center justify-between"
+>
+  <div>
+    <p>
+      Showing {{ number }} to {{ numberElements }} of {{ totalItems }} entries
+    </p>
+  </div>
+
+  <div class="flex flex-row">
+    <button
+      (click)="onPageChanged(1, size)"
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="!hasPrevPage"
+      disabled
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full cursor-not-allowed opacity-20 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="hasPrevPage"
+      (click)="onPageChanged(page - 1, size)"
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="!hasNextPage"
+      disabled
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full cursor-not-allowed opacity-20 focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      *ngIf="hasNextPage"
+      (click)="onPageChanged(page + 1, size)"
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      (click)="onPageChanged(totalPages, size)"
+      tippy="Halaman Terakhir"
+      placement="bottom"
+      class="w-8 h-8 mx-1 rounded-full focus:outline-none hover:bg-gray-100 focus:bg-gray-100"
+    >
+      <svg
+        class="w-4 h-4 m-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 5l7 7-7 7M5 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+    <span class="hidden w-1 h-4 mx-2 border-l border-gray-200 lg:block"
+      >&nbsp;</span
+    >
+    <select
+      [(ngModel)]="size"
+      (ngModelChange)="onPageChanged(page, size)"
+      class="w-16 min-w-0 p-1 text-sm text-right border border-gray-200 rounded-md block"
+    >
+      <option value="10">10</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+      <option value="500">500</option>
+    </select>
+  </div>
+</div>

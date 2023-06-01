@@ -1,0 +1,90 @@
+<section class="mb-12">
+  <div class="w-full flex flex-row border-b-[3px] mt-4 mb-8 gap-4">
+    <div
+      (click)="changeTab('instagram')"
+      class="{{
+        tab == 'instagram' ? 'text-[#434ddb] border-b-4 border-[#434ddb]' : ''
+      }} pb-2 cursor-pointer"
+    >
+      Instagram
+    </div>
+
+    <div
+      (click)="changeTab('youtube')"
+      class="{{
+        tab == 'youtube' ? 'text-[#434ddb] border-b-4 border-[#434ddb]' : ''
+      }} pb-2 cursor-pointer"
+    >
+      YouTube
+    </div>
+  </div>
+
+  <div *ngIf="tab == 'instagram'" class="flex flex-col lg:flex-row gap-8">
+    <div class="w-full lg:w-2/3 bg-gray-100 p-8 shadow-lg rounded-xl space-y-4">
+      <!-- small grid section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <app-small-container
+          [title]="'Reach'"
+          [number]="data?.reach"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Impressions'"
+          [number]="data?.impressions"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Followers'"
+          [number]="data?.followers"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Click Rate (CTR)'"
+          [number]="data?.ctr.toFixed(2)"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Total Clicks'"
+          [number]="data?.clicks.toFixed(2)"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Percentage of Reach'"
+          [number]="data?.reachPercentage.toFixed(2)"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Engagement Rate'"
+          [number]="data?.engagementRate.toFixed(2)"
+        ></app-small-container>
+        <app-small-container
+          [title]="'Total Engagement'"
+          [number]="data?.totalEngagements.toFixed(2)"
+        ></app-small-container>
+      </div>
+
+      <!-- medium grid section -->
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        <app-large-container
+          [title]="'Cost per Reach'"
+          [number]="data?.cpr.toFixed(2)"
+        ></app-large-container>
+        <app-large-container
+          [title]="'Cost per View'"
+          [number]="data?.cpv.toFixed(2)"
+        ></app-large-container>
+        <app-large-container
+          [title]="'Cost per Impressions'"
+          [number]="data?.cpi.toFixed(2)"
+        ></app-large-container>
+        <app-large-container
+          [title]="'Cost per Engagement'"
+          [number]="data?.cpe.toFixed(2)"
+        ></app-large-container>
+      </div>
+    </div>
+
+    <div class="lg:w-1/3 space-y-4 flex flex-col items-center">
+      <img src="/assets/img/graph.svg" alt="" />
+      <p>This is where the graph go</p>
+    </div>
+  </div>
+
+  <ng-container *ngIf="tab == 'youtube'">
+    <app-not-found></app-not-found>
+  </ng-container>
+</section>
